@@ -8,9 +8,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # API key configuration
-GOOGLE_API_KEY = os.getenv("KEY")
+GOOGLE_API_KEY = st.secrets["KEY"]
 if not GOOGLE_API_KEY:
-    raise ValueError("GOOGLE_API_KEY environment variable not found")
+    st.error("⚠️ API key not found. Please check secrets configuration.")
+    st.stop()
 genai.configure(api_key=GOOGLE_API_KEY)
 
 def is_image_related_prompt(prompt):
